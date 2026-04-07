@@ -1,342 +1,170 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Diário do DK</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diário do DK</title>
 
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, #0f172a, #111827);
-      color: #ffffff;
-      min-height: 100vh;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-    .container {
-      width: 100%;
-      max-width: 520px;
-      margin: 0 auto;
-      padding: 20px 16px 40px;
-    }
+<style>
+body {
+  margin:0;
+  font-family:Poppins;
+  background:linear-gradient(180deg,#0b1f38,#07111f);
+  color:white;
+}
 
-    .hero {
-      background: linear-gradient(135deg, #1d4ed8, #2563eb, #0ea5e9);
-      border-radius: 20px;
-      padding: 28px 20px;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-      margin-bottom: 18px;
-    }
+.container {
+  max-width:500px;
+  margin:auto;
+  padding:20px;
+}
 
-    .hero h1 {
-      font-size: 32px;
-      line-height: 1.1;
-      margin-bottom: 8px;
-    }
+.hero {
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  border-radius:20px;
+  padding:25px;
+  text-align:center;
+}
 
-    .hero p {
-      font-size: 15px;
-      opacity: 0.95;
-    }
+.hero h1 {
+  font-family:Anton;
+  font-size:36px;
+}
 
-    .card {
-      background: #1f2937;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 18px;
-      padding: 18px;
-      margin-bottom: 16px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-    }
+.card {
+  background:#111827;
+  padding:15px;
+  border-radius:15px;
+  margin-top:15px;
+}
 
-    .card h2 {
-      font-size: 20px;
-      margin-bottom: 14px;
-    }
+.rule {
+  margin:6px 0;
+}
 
-    .rules {
-      display: grid;
-      gap: 10px;
-    }
+.green {color:#22c55e;}
+.yellow {color:#facc15;}
 
-    .rule-item {
-      background: #111827;
-      border-radius: 12px;
-      padding: 12px;
-      font-size: 16px;
-      border: 1px solid rgba(255,255,255,0.06);
-    }
+input {
+  width:100%;
+  padding:12px;
+  margin-top:5px;
+  border-radius:10px;
+  border:none;
+  margin-bottom:10px;
+}
 
-    .highlight {
-      color: #22c55e;
-      font-weight: bold;
-    }
+button {
+  width:100%;
+  padding:14px;
+  background:#22c55e;
+  border:none;
+  border-radius:12px;
+  font-weight:bold;
+}
 
-    .danger {
-      color: #facc15;
-      font-weight: bold;
-    }
+.vagas {
+  text-align:center;
+}
 
-    .small {
-      font-size: 13px;
-      color: #cbd5e1;
-      margin-top: 8px;
-      line-height: 1.5;
-    }
+.bar {
+  height:12px;
+  background:#333;
+  border-radius:10px;
+  overflow:hidden;
+}
 
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+.fill {
+  height:100%;
+  background:linear-gradient(90deg,#facc15,#22c55e);
+}
 
-    label {
-      font-size: 14px;
-      color: #e5e7eb;
-      margin-bottom: 4px;
-      display: block;
-    }
+.player {
+  display:flex;
+  justify-content:space-between;
+  margin:5px 0;
+}
 
-    input {
-      width: 100%;
-      padding: 14px 14px;
-      border-radius: 12px;
-      border: none;
-      outline: none;
-      font-size: 15px;
-      background: #0f172a;
-      color: white;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    input::placeholder {
-      color: #94a3b8;
-    }
-
-    .btn {
-      border: none;
-      border-radius: 14px;
-      padding: 15px;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.2s ease;
-    }
-
-    .btn-primary {
-      background: #22c55e;
-      color: #08120a;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.05);
-    }
-
-    .ranking-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .player {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #111827;
-      border: 1px solid rgba(255,255,255,0.06);
-      padding: 12px 14px;
-      border-radius: 12px;
-    }
-
-    .player-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .position {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: #2563eb;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    .player-name {
-      font-weight: bold;
-      font-size: 15px;
-    }
-
-    .player-sub {
-      font-size: 12px;
-      color: #94a3b8;
-      margin-top: 2px;
-    }
-
-    .player-score {
-      font-size: 14px;
-      font-weight: bold;
-      color: #22c55e;
-    }
-
-    .footer-note {
-      text-align: center;
-      font-size: 12px;
-      color: #94a3b8;
-      margin-top: 10px;
-      line-height: 1.5;
-    }
-
-    .badge {
-      display: inline-block;
-      margin-top: 10px;
-      background: rgba(255,255,255,0.14);
-      color: white;
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: bold;
-    }
-  </style>
+</style>
 </head>
+
 <body>
-  <div class="container">
 
-    <section class="hero">
-      <h1>💰 Diário do DK</h1>
-      <p>Partidas de Brawl Stars valendo dinheiro por kill e vitória</p>
-      <div class="badge">🔥 Vagas limitadas por sala</div>
-    </section>
+<div class="container">
 
-    <section class="card">
-      <h2>📜 Como funciona</h2>
-      <div class="rules">
-        <div class="rule-item">🎮 Modo: <span class="highlight">Combate</span></div>
-        <div class="rule-item">💵 Ingresso: <span class="highlight">R$5,00</span></div>
-        <div class="rule-item">⚔️ Cada kill: <span class="highlight">+R$3,00</span></div>
-        <div class="rule-item">🏆 Cada vitória: <span class="highlight">+R$10,00</span></div>
-        <div class="rule-item">👥 Sala com <span class="danger">10 pessoas</span> (1 é o DK)</div>
-      </div>
-      <p class="small">
-        Preencha o formulário abaixo para entrar nas próximas partidas.
-      </p>
-    </section>
+<div class="hero">
+  <h1>💰 Diário do DK</h1>
+  <p>Ganhe dinheiro jogando Brawl Stars</p>
+</div>
 
-    <section class="card">
-      <h2>📝 Formulário de entrada</h2>
+<div class="card">
+  <h3>📜 Regras</h3>
+  <div class="rule">💵 Entrada: <span class="green">R$5</span></div>
+  <div class="rule">⚔️ Kill: <span class="green">+R$3</span></div>
+  <div class="rule">🏆 Vitória: <span class="green">+R$10</span></div>
+</div>
 
-      <!--
-        TROQUE o action abaixo pelo seu link do Formsubmit
-        ou por outro serviço que vá salvar as respostas.
-      -->
-      <form action="https://formsubmit.co/SEUEMAILAQUI@gmail.com" method="POST">
-        <div>
-          <label for="nome">Seu nome</label>
-          <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
-        </div>
+<div class="card vagas">
+  <h3>🚨 Vagas</h3>
+  <p><span id="ocupadas"></span>/9 preenchidas</p>
+  <p>Restam <span id="restantes" class="yellow"></span> vagas</p>
 
-        <div>
-          <label for="telefone">Seu número de telefone</label>
-          <input type="tel" id="telefone" name="telefone" placeholder="(99) 99999-9999" required>
-        </div>
-
-        <div>
-          <label for="nick">Seu nick no Brawl Stars</label>
-          <input type="text" id="nick" name="nick" placeholder="Digite seu nick" required>
-        </div>
-
-        <!-- opções extras do Formsubmit -->
-        <input type="hidden" name="_subject" value="Novo cadastro - Diário do DK">
-        <input type="hidden" name="_captcha" value="false">
-
-        <button type="submit" class="btn btn-primary">
-          🚀 Quero entrar
-        </button>
-      </form>
-
-      <p class="small">
-        Depois do envio, você pode ser chamado para as próximas salas conforme disponibilidade.
-      </p>
-    </section>
-
-    <section class="card">
-      <h2>🏅 Ranking dos players mais ativos</h2>
-      <div class="ranking-list">
-        <div class="player">
-          <div class="player-left">
-            <div class="position">1</div>
-            <div>
-              <div class="player-name">DKxShadow</div>
-              <div class="player-sub">18 partidas jogadas</div>
-            </div>
-          </div>
-          <div class="player-score">Top ativo</div>
-        </div>
-
-        <div class="player">
-          <div class="player-left">
-            <div class="position">2</div>
-            <div>
-              <div class="player-name">Brabo777</div>
-              <div class="player-sub">16 partidas jogadas</div>
-            </div>
-          </div>
-          <div class="player-score">Muito ativo</div>
-        </div>
-
-        <div class="player">
-          <div class="player-left">
-            <div class="position">3</div>
-            <div>
-              <div class="player-name">LoboBS</div>
-              <div class="player-sub">14 partidas jogadas</div>
-            </div>
-          </div>
-          <div class="player-score">Constante</div>
-        </div>
-
-        <div class="player">
-          <div class="player-left">
-            <div class="position">4</div>
-            <div>
-              <div class="player-name">NinjaPro</div>
-              <div class="player-sub">12 partidas jogadas</div>
-            </div>
-          </div>
-          <div class="player-score">Subindo</div>
-        </div>
-
-        <div class="player">
-          <div class="player-left">
-            <div class="position">5</div>
-            <div>
-              <div class="player-name">MitoBR</div>
-              <div class="player-sub">10 partidas jogadas</div>
-            </div>
-          </div>
-          <div class="player-score">Frequente</div>
-        </div>
-      </div>
-
-      <p class="small">
-        Atualize esse ranking manualmente conforme os jogadores forem participando mais.
-      </p>
-    </section>
-
-    <p class="footer-note">
-      Diário do DK • Brawl Stars • Partidas com vagas limitadas
-    </p>
-
+  <div class="bar">
+    <div id="fill" class="fill"></div>
   </div>
+</div>
+
+<div class="card">
+  <h3>📝 Entrar</h3>
+
+  <form onsubmit="enviar(event)">
+    <input type="text" placeholder="Seu nome" required>
+    <input type="tel" placeholder="Telefone" required>
+    <input type="text" placeholder="Nick do Brawl" required>
+
+    <button type="submit">🚀 Quero entrar</button>
+  </form>
+
+  <p id="msg" style="margin-top:10px;"></p>
+</div>
+
+<div class="card">
+  <h3>🏅 Ranking</h3>
+
+  <div class="player"><span>🥇 DKShadow</span><span>31 kills</span></div>
+  <div class="player"><span>🥈 Brabo777</span><span>24 kills</span></div>
+  <div class="player"><span>🥉 LoboBS</span><span>20 kills</span></div>
+  <div class="player"><span>NinjaPro</span><span>18 kills</span></div>
+  <div class="player"><span>MitoBR</span><span>15 kills</span></div>
+
+</div>
+
+</div>
+
+<script>
+let total = 9;
+let ocupadas = 7;
+
+document.getElementById("ocupadas").innerText = ocupadas;
+document.getElementById("restantes").innerText = total - ocupadas;
+
+document.getElementById("fill").style.width = (ocupadas/total*100) + "%";
+
+function enviar(e){
+  e.preventDefault();
+
+  document.getElementById("msg").innerHTML = `
+  ✅ Cadastro enviado!<br><br>
+  Faça o Pix de <b>R$5,00</b><br><br>
+  Chave Pix: <b>11998385244</b><br><br>
+  Envie o comprovante com:<br>
+  Nome + Nick<br><br>
+  ⚠️ Vaga só após pagamento
+  `;
+}
+</script>
+
 </body>
 </html>
