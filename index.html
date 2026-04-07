@@ -1,170 +1,130 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diário do DK</title>
+Crie um site moderno, limpo e profissional para um projeto chamado “Diário do DK”.
 
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+O estilo deve ser inspirado em páginas modernas de apps e plataformas (como dashboards ou landing pages minimalistas), com visual elegante, espaçamento bem definido e aparência premium.
 
-<style>
-body {
-  margin:0;
-  font-family:Poppins;
-  background:linear-gradient(180deg,#0b1f38,#07111f);
-  color:white;
-}
+NÃO deixar o site poluído ou cheio de informação. Priorizar clareza, estética e organização.
 
-.container {
-  max-width:500px;
-  margin:auto;
-  padding:20px;
-}
+OBJETIVO:
+Fazer o usuário entender rapidamente, confiar e preencher o formulário.
 
-.hero {
-  background:linear-gradient(135deg,#2563eb,#1d4ed8);
-  border-radius:20px;
-  padding:25px;
-  text-align:center;
-}
+---
 
-.hero h1 {
-  font-family:Anton;
-  font-size:36px;
-}
+1. TOPO (HERO)
+- Nome grande: “Diário do DK”
+- Subtítulo: “Partidas de Brawl Stars valendo dinheiro real”
+- Fundo com gradiente escuro moderno (azul escuro, roxo, preto)
+- Visual centralizado
+- Design elegante (não exagerado)
 
-.card {
-  background:#111827;
-  padding:15px;
-  border-radius:15px;
-  margin-top:15px;
-}
+Adicionar 3 cards abaixo:
+- 💵 R$5 → Entrada
+- ⚔️ +R$3 → Por kill
+- 🏆 +R$10 → Por vitória
 
-.rule {
-  margin:6px 0;
-}
+Esses cards devem ser pequenos, bonitos e alinhados, estilo app moderno.
 
-.green {color:#22c55e;}
-.yellow {color:#facc15;}
+---
 
-input {
-  width:100%;
-  padding:12px;
-  margin-top:5px;
-  border-radius:10px;
-  border:none;
-  margin-bottom:10px;
-}
+2. SEÇÃO DE VAGAS (ESTILO PREMIUM)
+Criar uma área com:
 
-button {
-  width:100%;
-  padding:14px;
-  background:#22c55e;
-  border:none;
-  border-radius:12px;
-  font-weight:bold;
-}
+- Vagas totais: 9
+- Inscritos: número dinâmico
+- Restantes: número dinâmico
 
-.vagas {
-  text-align:center;
-}
+Mostrar isso em 3 caixas lado a lado, igual um painel.
 
-.bar {
-  height:12px;
-  background:#333;
-  border-radius:10px;
-  overflow:hidden;
-}
+Abaixo disso:
+- Barra de progresso elegante
+- Texto:
+  “X/9 vagas preenchidas”
 
-.fill {
-  height:100%;
-  background:linear-gradient(90deg,#facc15,#22c55e);
-}
+Se lotado:
+- Mostrar mensagem:
+  “Lotado — todas as vagas foram preenchidas”
 
-.player {
-  display:flex;
-  justify-content:space-between;
-  margin:5px 0;
-}
+Visual limpo, sem exagero de cores.
 
-</style>
-</head>
+---
 
-<body>
+3. FORMULÁRIO (SIMPLES E BONITO)
+Campos:
+- Nome
+- Telefone
+- Nick do Brawl Stars
 
-<div class="container">
+Design:
+- Inputs arredondados
+- Fundo escuro
+- Bordas suaves
+- Espaçamento bom
 
-<div class="hero">
-  <h1>💰 Diário do DK</h1>
-  <p>Ganhe dinheiro jogando Brawl Stars</p>
-</div>
+Botão:
+- Grande
+- Cor destaque (roxo/verde)
+- Texto: “Garantir minha vaga”
 
-<div class="card">
-  <h3>📜 Regras</h3>
-  <div class="rule">💵 Entrada: <span class="green">R$5</span></div>
-  <div class="rule">⚔️ Kill: <span class="green">+R$3</span></div>
-  <div class="rule">🏆 Vitória: <span class="green">+R$10</span></div>
-</div>
+---
 
-<div class="card vagas">
-  <h3>🚨 Vagas</h3>
-  <p><span id="ocupadas"></span>/9 preenchidas</p>
-  <p>Restam <span id="restantes" class="yellow"></span> vagas</p>
+4. MENSAGEM APÓS ENVIO
+Após enviar, mostrar:
 
-  <div class="bar">
-    <div id="fill" class="fill"></div>
-  </div>
-</div>
+“✅ Cadastro enviado com sucesso!
 
-<div class="card">
-  <h3>📝 Entrar</h3>
+Agora faça o Pix de R$5,00 para garantir sua vaga.
 
-  <form onsubmit="enviar(event)">
-    <input type="text" placeholder="Seu nome" required>
-    <input type="tel" placeholder="Telefone" required>
-    <input type="text" placeholder="Nick do Brawl" required>
+Chave Pix: [colocar aqui]
 
-    <button type="submit">🚀 Quero entrar</button>
-  </form>
+Envie o comprovante com:
+- Nome
+- Nick
 
-  <p id="msg" style="margin-top:10px;"></p>
-</div>
+⚠️ A vaga só é confirmada após o pagamento.”
 
-<div class="card">
-  <h3>🏅 Ranking</h3>
+---
 
-  <div class="player"><span>🥇 DKShadow</span><span>31 kills</span></div>
-  <div class="player"><span>🥈 Brabo777</span><span>24 kills</span></div>
-  <div class="player"><span>🥉 LoboBS</span><span>20 kills</span></div>
-  <div class="player"><span>NinjaPro</span><span>18 kills</span></div>
-  <div class="player"><span>MitoBR</span><span>15 kills</span></div>
+5. RANKING (ESTILO COMPETITIVO LIMPO)
+Criar ranking top 5:
 
-</div>
+- 🥇 🥈 🥉
+- Nome do player
+- Estatística (ex: kills ou partidas)
 
-</div>
+Design:
+- estilo lista elegante
+- leve destaque no top 1
+- sem exagero visual
 
-<script>
-let total = 9;
-let ocupadas = 7;
+---
 
-document.getElementById("ocupadas").innerText = ocupadas;
-document.getElementById("restantes").innerText = total - ocupadas;
+6. DESIGN GERAL
+- Estilo moderno e minimalista
+- Fundo escuro com gradiente
+- Tipografia:
+  - Título: Anton
+  - Texto: Poppins
+- Bordas arredondadas
+- Sombra suave
+- Espaçamento bem distribuído
+- Nada poluído
 
-document.getElementById("fill").style.width = (ocupadas/total*100) + "%";
+---
 
-function enviar(e){
-  e.preventDefault();
+7. RESPONSIVO (IMPORTANTE)
+- Totalmente otimizado para celular
+- Layout centralizado
+- Botões grandes
+- Texto legível
 
-  document.getElementById("msg").innerHTML = `
-  ✅ Cadastro enviado!<br><br>
-  Faça o Pix de <b>R$5,00</b><br><br>
-  Chave Pix: <b>11998385244</b><br><br>
-  Envie o comprovante com:<br>
-  Nome + Nick<br><br>
-  ⚠️ Vaga só após pagamento
-  `;
-}
-</script>
+---
 
-</body>
-</html>
+8. ANIMAÇÕES LEVES
+- hover nos botões
+- leve transição na barra de progresso
+- nada exagerado
+
+---
+
+GERAR:
+Código completo em HTML + CSS + JavaScript
+Pronto para usar no GitHub Pages.
