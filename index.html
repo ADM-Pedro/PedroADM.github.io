@@ -1,130 +1,173 @@
-Crie um site moderno, limpo e profissional para um projeto chamado “Diário do DK”.
+Crie um site completo, bonito, moderno e responsivo para celular, com visual premium e estilo de plataforma/app, para um projeto chamado “Diário do DK”.
 
-O estilo deve ser inspirado em páginas modernas de apps e plataformas (como dashboards ou landing pages minimalistas), com visual elegante, espaçamento bem definido e aparência premium.
+IMPORTANTE:
+- Gere TUDO em um único arquivo `index.html`
+- Inclua HTML, CSS e JavaScript no mesmo arquivo
+- Não use React
+- Não use frameworks
+- Não use bibliotecas externas além do Google Fonts
+- O código deve estar limpo, funcional e pronto para subir no GitHub Pages
+- O site deve funcionar sozinho ao abrir o arquivo
+- Não explique o código, apenas entregue o código completo
 
-NÃO deixar o site poluído ou cheio de informação. Priorizar clareza, estética e organização.
+OBJETIVO DO SITE:
+O site é para jogadores de Brawl Stars se cadastrarem para participar de partidas pagas no “Diário do DK”.
 
-OBJETIVO:
-Fazer o usuário entender rapidamente, confiar e preencher o formulário.
+ESTILO VISUAL:
+- Visual moderno, bonito, limpo e profissional
+- Inspirado em dashboards e landing pages premium
+- Fundo escuro com gradiente elegante
+- Cores principais: azul escuro, roxo, preto, com detalhes em verde e amarelo
+- Aparência de produto real, não de página simples
+- Bordas arredondadas
+- Sombras suaves
+- Bom espaçamento
+- Layout centralizado
+- Design mobile first
+- Deve ficar muito bonito no celular
 
----
+TIPOGRAFIA:
+- Usar Google Fonts
+- Título principal com fonte forte, como Anton
+- Restante do texto com fonte como Poppins
 
-1. TOPO (HERO)
-- Nome grande: “Diário do DK”
+ESTRUTURA DO SITE:
+
+1. HERO / TOPO
+Criar uma seção principal bem bonita contendo:
+- Título grande: “Diário do DK”
 - Subtítulo: “Partidas de Brawl Stars valendo dinheiro real”
-- Fundo com gradiente escuro moderno (azul escuro, roxo, preto)
-- Visual centralizado
-- Design elegante (não exagerado)
+- Um pequeno selo/status visual tipo:
+  - “Vagas limitadas”
+  ou
+  - “Online”
+- Abaixo do título, criar 3 cards pequenos e bonitos lado a lado mostrando:
+  - Entrada: R$5
+  - Por kill: +R$3
+  - Por vitória: +R$10
 
-Adicionar 3 cards abaixo:
-- 💵 R$5 → Entrada
-- ⚔️ +R$3 → Por kill
-- 🏆 +R$10 → Por vitória
-
-Esses cards devem ser pequenos, bonitos e alinhados, estilo app moderno.
-
----
-
-2. SEÇÃO DE VAGAS (ESTILO PREMIUM)
-Criar uma área com:
-
+2. PAINEL DE VAGAS
+Criar uma seção moderna mostrando o status da próxima sala:
 - Vagas totais: 9
-- Inscritos: número dinâmico
-- Restantes: número dinâmico
+- Inscritos: valor dinâmico via JavaScript
+- Restantes: valor dinâmico via JavaScript
 
-Mostrar isso em 3 caixas lado a lado, igual um painel.
+Essas 3 informações devem ficar em 3 cards bonitos lado a lado.
 
-Abaixo disso:
-- Barra de progresso elegante
-- Texto:
-  “X/9 vagas preenchidas”
+Abaixo disso, mostrar:
+- Uma barra de progresso horizontal bonita
+- Texto centralizado como:
+  “7/9 vagas preenchidas”
 
-Se lotado:
-- Mostrar mensagem:
-  “Lotado — todas as vagas foram preenchidas”
+Se as vagas restantes forem 0, mostrar uma mensagem de alerta elegante:
+- “Lotado — todas as vagas foram preenchidas”
 
-Visual limpo, sem exagero de cores.
+Se ainda houver vagas, mostrar:
+- “Garanta sua vaga antes que acabe”
 
----
+Criar a lógica em JavaScript com variáveis fáceis de editar, por exemplo:
+- totalVagas = 9
+- inscritos = 7
 
-3. FORMULÁRIO (SIMPLES E BONITO)
-Campos:
-- Nome
+3. FORMULÁRIO
+Criar uma seção bonita com título como:
+- “Entrar”
+ou
+- “Garantir minha vaga”
+
+O formulário deve ter estes campos:
+- Nome completo
 - Telefone
 - Nick do Brawl Stars
 
-Design:
-- Inputs arredondados
+O design do formulário deve ser moderno:
+- Inputs grandes
 - Fundo escuro
 - Bordas suaves
-- Espaçamento bom
+- Espaçamento bonito
+- Totalmente responsivo
 
-Botão:
+Botão principal:
 - Grande
-- Cor destaque (roxo/verde)
+- Chamativo
+- Bonito
 - Texto: “Garantir minha vaga”
 
----
-
 4. MENSAGEM APÓS ENVIO
-Após enviar, mostrar:
+Ao enviar o formulário:
+- Não precisa enviar para backend
+- Não precisa salvar em banco
+- Apenas impedir o reload da página com JavaScript
+- Esconder o formulário
+- Mostrar uma mensagem bonita de confirmação
+
+A mensagem deve dizer exatamente:
 
 “✅ Cadastro enviado com sucesso!
 
 Agora faça o Pix de R$5,00 para garantir sua vaga.
 
-Chave Pix: [colocar aqui]
+Chave Pix: SUA_CHAVE_AQUI
 
-Envie o comprovante com:
-- Nome
-- Nick
+Depois do pagamento, envie o comprovante com:
+- Seu nome
+- Seu nick do Brawl Stars
+
+Exemplo:
+Pedro - DKShadow
 
 ⚠️ A vaga só é confirmada após o pagamento.”
 
----
+Essa mensagem deve aparecer em um card bonito, destacado e elegante.
 
-5. RANKING (ESTILO COMPETITIVO LIMPO)
-Criar ranking top 5:
+5. RANKING
+Criar uma seção chamada:
+- “Ranking dos players mais ativos”
 
-- 🥇 🥈 🥉
-- Nome do player
-- Estatística (ex: kills ou partidas)
+Mostrar Top 5 jogadores com layout bonito.
+Cada item deve mostrar:
+- posição
+- nome
+- estatística
 
-Design:
-- estilo lista elegante
-- leve destaque no top 1
-- sem exagero visual
+Exemplo:
+1. DKShadow — 31 kills
+2. Brabo777 — 24 kills
+3. LoboBS — 20 kills
+4. NinjaPro — 18 kills
+5. MitoBR — 15 kills
 
----
+Regras do design:
+- destacar o top 1
+- usar medalhas ou estilo visual elegante
+- não exagerar
+- manter limpo e moderno
 
-6. DESIGN GERAL
-- Estilo moderno e minimalista
-- Fundo escuro com gradiente
-- Tipografia:
-  - Título: Anton
-  - Texto: Poppins
-- Bordas arredondadas
-- Sombra suave
-- Espaçamento bem distribuído
-- Nada poluído
+6. DETALHES DE UX
+- Adicionar hover suave nos botões
+- Adicionar transições leves
+- A barra de progresso deve animar suavemente
+- Tudo deve parecer profissional
+- Não deixar visual infantil
+- Não deixar poluído
+- Não encher de texto desnecessário
 
----
+7. RESPONSIVIDADE
+- O site deve ficar excelente em celular
+- Também deve funcionar bem no desktop
+- O layout deve se ajustar automaticamente
 
-7. RESPONSIVO (IMPORTANTE)
-- Totalmente otimizado para celular
-- Layout centralizado
-- Botões grandes
-- Texto legível
+8. JAVASCRIPT
+Usar JavaScript simples para:
+- calcular vagas restantes
+- atualizar barra de progresso
+- mostrar mensagem “lotado” quando necessário
+- interceptar envio do formulário
+- trocar a área do formulário pela mensagem de Pix
 
----
-
-8. ANIMAÇÕES LEVES
-- hover nos botões
-- leve transição na barra de progresso
-- nada exagerado
-
----
-
-GERAR:
-Código completo em HTML + CSS + JavaScript
-Pronto para usar no GitHub Pages.
+IMPORTANTE NO CÓDIGO:
+- Entregue apenas o código final completo
+- Tudo em um único `index.html`
+- Sem comentários longos
+- Sem explicações fora do código
+- Código pronto para copiar e colar
