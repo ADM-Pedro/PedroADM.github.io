@@ -7,24 +7,24 @@
 
 <style>
 body{
-  font-family:Arial;
-  background:#0b1f38;
-  color:white;
-  text-align:center;
-  padding:20px;
+font-family:Arial;
+background:#0b1f38;
+color:white;
+text-align:center;
+padding:20px;
 }
 .card{
-  background:#111827;
-  padding:15px;
-  border-radius:10px;
-  margin:10px;
+background:#111827;
+padding:15px;
+border-radius:10px;
+margin:10px;
 }
 button{
-  padding:15px;
-  background:#22c55e;
-  border:none;
-  border-radius:10px;
-  font-size:16px;
+padding:15px;
+background:#22c55e;
+border:none;
+border-radius:10px;
+font-size:16px;
 }
 </style>
 </head>
@@ -41,32 +41,76 @@ button{
 </div>
 
 <div class="card">
-👥 7/9 vagas preenchidas<br>
-⚠️ Restam 2 vagas
+👥 <span id="ocupadas">0</span>/9 vagas<br>
+⚠️ Restam <span id="restantes">9</span>
 </div>
 
 <div class="card">
+
 <form onsubmit="enviar(event)">
-<input placeholder="Nome" required><br><br>
-<input placeholder="Telefone" required><br><br>
-<input placeholder="Nick" required><br><br>
+<input id="nome" placeholder="Nome" required><br><br>
+<input id="tel" placeholder="Telefone" required><br><br>
+<input id="nick" placeholder="Nick" required><br><br>
 
 <button>Entrar</button>
 </form>
 
 <p id="msg"></p>
+
+</div>
+
+<div class="card">
+<h3>👥 Players na sala</h3>
+<ul id="lista"></ul>
 </div>
 
 <script>
+
+const URL = "COLE_SEU_LINK_AQUI";
+
 function enviar(e){
 e.preventDefault();
-document.getElementById("msg").innerHTML = `
-Cadastro enviado!<br><br>
-Faça o Pix de R$5<br><br>
-Chave: SUA_CHAVE_PIX<br><br>
-Envie comprovante com nome e nick
-`;
+
+fetch(URL,{
+method:"POST",
+body: JSON.stringify({
+nome: document.getElementById("nome").value,
+telefone: document.getElementById("tel").value,
+nick: document.getElementById("nick").value
+})
+});
+
+document.getElementById("msg").innerHTML =
+"Cadastro enviado! Faça o Pix de R$5 e envie comprovante.";
+
+carregar();
 }
+
+function carregar(){
+fetch(URL)
+.then(r=>r.json())
+.then(data=>{
+
+let lista = document.getElementById("lista");
+lista.innerHTML="";
+
+data.forEach(nick=>{
+let li=document.createElement("li");
+li.innerText=nick;
+lista.appendChild(li);
+});
+
+let total=9;
+let ocupadas=data.length;
+
+document.getElementById("ocupadas").innerText=ocupadas;
+document.getElementById("restantes").innerText=total-ocupadas;
+
+});
+}
+
+carregar();
+
 </script>
 
 </body>
