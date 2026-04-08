@@ -1,267 +1,244 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diário do DK</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-
-body{
-font-family:Poppins;
-background:linear-gradient(180deg,#0b1f38,#020617);
-color:white;
-padding:20px;
-}
-
-.container{
-max-width:520px;
-margin:auto;
-}
-
-.hero{
-background:linear-gradient(135deg,#2563eb,#1d4ed8);
-border-radius:20px;
-padding:25px;
-text-align:center;
-box-shadow:0 10px 30px rgba(0,0,0,0.5);
-margin-bottom:15px;
-}
-
-.hero h1{
-font-size:30px;
-font-weight:700;
-}
-
-.hero p{
-opacity:0.9;
-font-size:14px;
-margin-top:5px;
-}
-
-.stats{
-display:flex;
-gap:10px;
-margin-top:15px;
-}
-
-.stat{
-flex:1;
-background:rgba(255,255,255,0.1);
-padding:12px;
-border-radius:12px;
-font-size:13px;
-}
-
-.card{
-background:#111827;
-border-radius:16px;
-padding:16px;
-margin-bottom:15px;
-box-shadow:0 5px 20px rgba(0,0,0,0.4);
-}
-
-.title{
-font-weight:700;
-margin-bottom:10px;
-}
-
-.progress{
-height:12px;
-background:#1f2937;
-border-radius:10px;
-overflow:hidden;
-margin-top:10px;
-}
-
-.fill{
-height:100%;
-background:linear-gradient(90deg,#22c55e,#4ade80);
-transition:0.4s;
-}
-
-input{
-width:100%;
-padding:13px;
-margin-top:8px;
-border-radius:10px;
-border:none;
-background:#020617;
-color:white;
-}
-
-button{
-width:100%;
-padding:14px;
-margin-top:10px;
-border:none;
-border-radius:12px;
-background:linear-gradient(90deg,#22c55e,#16a34a);
-font-weight:700;
-cursor:pointer;
-}
-
-.copy-btn{
-background:#2563eb;
-color:white;
-}
-
-ul{
-list-style:none;
-}
-
-li{
-background:#1f2937;
-padding:10px;
-margin:5px 0;
-border-radius:8px;
-display:flex;
-justify-content:space-between;
-}
-
-.badge{
-background:#22c55e;
-padding:3px 8px;
-border-radius:6px;
-font-size:11px;
-}
-
-.alert{
-margin-top:10px;
-font-size:14px;
-text-align:center;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diário do DK</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:Arial,sans-serif;
+      background:#0b1f38;
+      color:#fff;
+      padding:20px;
+    }
+    .container{
+      max-width:500px;
+      margin:0 auto;
+    }
+    .card{
+      background:#111827;
+      border-radius:14px;
+      padding:16px;
+      margin-bottom:14px;
+    }
+    h1{
+      text-align:center;
+      margin-bottom:8px;
+    }
+    .sub{
+      text-align:center;
+      opacity:.9;
+      margin-bottom:16px;
+    }
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:8px;
+      margin-top:12px;
+    }
+    .stat{
+      background:#1f2937;
+      border-radius:10px;
+      padding:10px;
+      text-align:center;
+      font-size:14px;
+    }
+    .progress{
+      width:100%;
+      height:10px;
+      background:#1f2937;
+      border-radius:999px;
+      overflow:hidden;
+      margin-top:10px;
+    }
+    .fill{
+      height:100%;
+      width:0%;
+      background:#22c55e;
+      transition:.3s;
+    }
+    input{
+      width:100%;
+      padding:12px;
+      margin-top:10px;
+      border:none;
+      border-radius:10px;
+      background:#0f172a;
+      color:#fff;
+    }
+    button{
+      width:100%;
+      padding:13px;
+      margin-top:10px;
+      border:none;
+      border-radius:10px;
+      background:#22c55e;
+      color:#000;
+      font-weight:bold;
+      cursor:pointer;
+    }
+    .copy-btn{
+      background:#2563eb;
+      color:#fff;
+    }
+    ul{
+      list-style:none;
+      padding-left:0;
+      margin-top:10px;
+    }
+    li{
+      background:#1f2937;
+      border-radius:8px;
+      padding:10px;
+      margin-bottom:8px;
+    }
+    #msg{
+      margin-top:12px;
+      line-height:1.5;
+    }
+    .small{
+      opacity:.85;
+      font-size:14px;
+    }
+  </style>
 </head>
-
 <body>
+  <div class="container">
 
-<div class="container">
+    <div class="card">
+      <h1>💰 Diário do DK</h1>
+      <div class="sub">Partidas de Brawl Stars valendo dinheiro</div>
 
-<div class="hero">
-<h1>💰 Diário do DK</h1>
-<p>Partidas valendo dinheiro real</p>
+      <div class="stats">
+        <div class="stat">💵 R$5<br>Entrada</div>
+        <div class="stat">⚔️ +R$3<br>Kill</div>
+        <div class="stat">🏆 +R$10<br>Vitória</div>
+      </div>
+    </div>
 
-<div class="stats">
-<div class="stat">💵 R$5<br>Entrada</div>
-<div class="stat">⚔️ +R$3<br>Kill</div>
-<div class="stat">🏆 +R$10<br>Vitória</div>
-</div>
-</div>
+    <div class="card">
+      <h3>🚨 Vagas</h3>
+      <p><span id="ocupadas">0</span>/9 preenchidas</p>
+      <p>Restam <span id="restantes">9</span> vagas</p>
+      <div class="progress">
+        <div class="fill" id="fill"></div>
+      </div>
+      <p class="small" id="statusSala" style="margin-top:10px;">Carregando...</p>
+    </div>
 
-<div class="card">
-<div class="title">🚨 Status da Sala</div>
+    <div class="card">
+      <h3>📝 Entrar</h3>
 
-<p><b><span id="ocupadas">0</span>/9</b> jogadores</p>
-<p>Restam <b><span id="restantes">9</span></b> vagas</p>
+      <form id="cadastroForm">
+        <input id="nome" type="text" placeholder="Seu nome" required>
+        <input id="tel" type="tel" placeholder="Telefone" required>
+        <input id="nick" type="text" placeholder="Nick do Brawl Stars" required>
+        <button type="submit">Garantir vaga</button>
+      </form>
 
-<div class="progress">
-<div id="fill" class="fill"></div>
-</div>
+      <div id="msg"></div>
+    </div>
 
-<div id="alerta" class="alert"></div>
+    <div class="card">
+      <h3>👥 Players cadastrados</h3>
+      <ul id="lista"></ul>
+    </div>
 
-</div>
+  </div>
 
-<div class="card">
-<div class="title">📝 Entrar na partida</div>
+  <script>
+    const URL = "COLE_SEU_LINK_AQUI";
+    const PIX = "SUA_CHAVE_PIX_AQUI";
+    const TOTAL = 9;
 
-<form onsubmit="enviar(event)">
-<input id="nome" placeholder="Seu nome" required>
-<input id="tel" placeholder="Telefone" required>
-<input id="nick" placeholder="Nick do Brawl" required>
+    const form = document.getElementById("cadastroForm");
+    const msg = document.getElementById("msg");
+    const lista = document.getElementById("lista");
+    const ocupadasEl = document.getElementById("ocupadas");
+    const restantesEl = document.getElementById("restantes");
+    const fillEl = document.getElementById("fill");
+    const statusSala = document.getElementById("statusSala");
 
-<button>🚀 Garantir vaga</button>
-</form>
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
 
-<div id="pixArea"></div>
+      const nome = document.getElementById("nome").value.trim();
+      const telefone = document.getElementById("tel").value.trim();
+      const nick = document.getElementById("nick").value.trim();
 
-</div>
+      try {
+        const res = await fetch(URL, {
+          method: "POST",
+          body: JSON.stringify({ nome, telefone, nick })
+        });
 
-<div class="card">
-<div class="title">👥 Players confirmados</div>
-<ul id="lista"></ul>
-</div>
+        const texto = await res.text();
 
-</div>
+        if (texto === "LOTADO") {
+          msg.innerHTML = "❌ A sala já está lotada.";
+          return;
+        }
 
-<script>
+        if (texto === "JA_ENTROU") {
+          msg.innerHTML = "⚠️ Esse nick já foi cadastrado.";
+          return;
+        }
 
-const URL = "https://script.google.com/macros/s/AKfycbwzyjwFh00Vq8igMeEd7rSuG7imTSsK5vFQUY-f8gcdb4qhAHw6PW_r47BzGKMBFODh/exec";
-const PIX = "11998385244";
-const TOTAL = 9;
+        msg.innerHTML = `
+          ✅ Cadastro enviado!<br><br>
+          Faça o Pix de <b>R$5,00</b><br><br>
+          <b id="pixKey">${PIX}</b><br>
+          <button class="copy-btn" type="button" onclick="copiarPix()">📋 Copiar Pix</button>
+          <br><br>
+          Envie o comprovante com nome + nick
+        `;
 
-function enviar(e){
-e.preventDefault();
+        form.reset();
+        carregar();
+      } catch (err) {
+        msg.innerHTML = "❌ Erro ao enviar cadastro.";
+      }
+    });
 
-fetch(URL,{
-method:"POST",
-body: JSON.stringify({
-nome: document.getElementById("nome").value,
-telefone: document.getElementById("tel").value,
-nick: document.getElementById("nick").value
-})
-});
+    function copiarPix() {
+      navigator.clipboard.writeText(PIX);
+      alert("Pix copiado!");
+    }
 
-document.getElementById("pixArea").innerHTML = `
-<div class="alert">
-✅ Cadastro enviado!<br><br>
-Faça o Pix de <b>R$5,00</b><br><br>
+    async function carregar() {
+      try {
+        const res = await fetch(URL);
+        const data = await res.json();
 
-<b id="pixKey">${PIX}</b>
+        lista.innerHTML = "";
 
-<button class="copy-btn" onclick="copiar()">📋 Copiar Pix</button>
+        data.forEach(function(nick) {
+          const li = document.createElement("li");
+          li.textContent = nick;
+          lista.appendChild(li);
+        });
 
-<br><br>
-Envie comprovante com nome + nick
-</div>
-`;
+        const ocupadas = data.length;
+        const restantes = TOTAL - ocupadas;
 
-carregar();
-}
+        ocupadasEl.textContent = ocupadas;
+        restantesEl.textContent = restantes;
+        fillEl.style.width = (ocupadas / TOTAL * 100) + "%";
 
-function copiar(){
-navigator.clipboard.writeText(PIX);
-alert("Pix copiado!");
-}
+        if (ocupadas >= TOTAL) {
+          statusSala.textContent = "🔥 Sala lotada";
+        } else if (restantes <= 2) {
+          statusSala.textContent = "⚠️ Últimas vagas";
+        } else {
+          statusSala.textContent = "✅ Vagas abertas";
+        }
+      } catch (err) {
+        statusSala.textContent = "❌ Erro ao carregar jogadores";
+      }
+    }
 
-function carregar(){
-fetch(URL)
-.then(r=>r.json())
-.then(data=>{
-
-let lista = document.getElementById("lista");
-lista.innerHTML="";
-
-data.forEach(nick=>{
-let li=document.createElement("li");
-li.innerHTML = `${nick} <span class="badge">OK</span>`;
-lista.appendChild(li);
-});
-
-let ocupadas = data.length;
-
-document.getElementById("ocupadas").innerText=ocupadas;
-document.getElementById("restantes").innerText=TOTAL-ocupadas;
-document.getElementById("fill").style.width=(ocupadas/TOTAL*100)+"%";
-
-if(ocupadas >= TOTAL){
-document.getElementById("alerta").innerHTML="🔥 Sala lotada!";
-}else if(ocupadas >= TOTAL-2){
-document.getElementById("alerta").innerHTML="⚠️ Últimas vagas!";
-}else{
-document.getElementById("alerta").innerHTML="Vagas abertas";
-}
-
-});
-}
-
-carregar();
-
-</script>
-
+    carregar();
+  </script>
 </body>
 </html>
