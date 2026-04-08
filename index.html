@@ -5,68 +5,194 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diário do DK</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
 body{
-font-family:Arial;
-background:#0b1f38;
+font-family:Poppins;
+background:linear-gradient(180deg,#0b1f38,#020617);
 color:white;
-text-align:center;
 padding:20px;
 }
+
+.container{
+max-width:520px;
+margin:auto;
+}
+
+.hero{
+background:linear-gradient(135deg,#2563eb,#1d4ed8);
+border-radius:20px;
+padding:25px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.5);
+margin-bottom:15px;
+}
+
+.hero h1{
+font-size:30px;
+font-weight:700;
+}
+
+.hero p{
+opacity:0.9;
+font-size:14px;
+margin-top:5px;
+}
+
+.stats{
+display:flex;
+gap:10px;
+margin-top:15px;
+}
+
+.stat{
+flex:1;
+background:rgba(255,255,255,0.1);
+padding:12px;
+border-radius:12px;
+font-size:13px;
+}
+
 .card{
 background:#111827;
-padding:15px;
-border-radius:10px;
-margin:10px;
+border-radius:16px;
+padding:16px;
+margin-bottom:15px;
+box-shadow:0 5px 20px rgba(0,0,0,0.4);
 }
-button{
-padding:15px;
-background:#22c55e;
-border:none;
+
+.title{
+font-weight:700;
+margin-bottom:10px;
+}
+
+.progress{
+height:12px;
+background:#1f2937;
 border-radius:10px;
-font-size:16px;
+overflow:hidden;
+margin-top:10px;
+}
+
+.fill{
+height:100%;
+background:linear-gradient(90deg,#22c55e,#4ade80);
+transition:0.4s;
+}
+
+input{
+width:100%;
+padding:13px;
+margin-top:8px;
+border-radius:10px;
+border:none;
+background:#020617;
+color:white;
+}
+
+button{
+width:100%;
+padding:14px;
+margin-top:10px;
+border:none;
+border-radius:12px;
+background:linear-gradient(90deg,#22c55e,#16a34a);
+font-weight:700;
+cursor:pointer;
+}
+
+.copy-btn{
+background:#2563eb;
+color:white;
+}
+
+ul{
+list-style:none;
+}
+
+li{
+background:#1f2937;
+padding:10px;
+margin:5px 0;
+border-radius:8px;
+display:flex;
+justify-content:space-between;
+}
+
+.badge{
+background:#22c55e;
+padding:3px 8px;
+border-radius:6px;
+font-size:11px;
+}
+
+.alert{
+margin-top:10px;
+font-size:14px;
+text-align:center;
 }
 </style>
 </head>
 
 <body>
 
+<div class="container">
+
+<div class="hero">
 <h1>💰 Diário do DK</h1>
-<p>Ganhe dinheiro jogando Brawl Stars</p>
+<p>Partidas valendo dinheiro real</p>
 
-<div class="card">
-💵 Entrada: R$5<br>
-⚔️ Kill: +R$3<br>
-🏆 Vitória: +R$10
+<div class="stats">
+<div class="stat">💵 R$5<br>Entrada</div>
+<div class="stat">⚔️ +R$3<br>Kill</div>
+<div class="stat">🏆 +R$10<br>Vitória</div>
+</div>
 </div>
 
 <div class="card">
-👥 <span id="ocupadas">0</span>/9 vagas<br>
-⚠️ Restam <span id="restantes">9</span>
+<div class="title">🚨 Status da Sala</div>
+
+<p><b><span id="ocupadas">0</span>/9</b> jogadores</p>
+<p>Restam <b><span id="restantes">9</span></b> vagas</p>
+
+<div class="progress">
+<div id="fill" class="fill"></div>
+</div>
+
+<div id="alerta" class="alert"></div>
+
 </div>
 
 <div class="card">
+<div class="title">📝 Entrar na partida</div>
 
 <form onsubmit="enviar(event)">
-<input id="nome" placeholder="Nome" required><br><br>
-<input id="tel" placeholder="Telefone" required><br><br>
-<input id="nick" placeholder="Nick" required><br><br>
+<input id="nome" placeholder="Seu nome" required>
+<input id="tel" placeholder="Telefone" required>
+<input id="nick" placeholder="Nick do Brawl" required>
 
-<button>Entrar</button>
+<button>🚀 Garantir vaga</button>
 </form>
 
-<p id="msg"></p>
+<div id="pixArea"></div>
 
 </div>
 
 <div class="card">
-<h3>👥 Players na sala</h3>
+<div class="title">👥 Players confirmados</div>
 <ul id="lista"></ul>
+</div>
+
 </div>
 
 <script>
 
 const URL = "https://script.google.com/macros/s/AKfycbwzyjwFh00Vq8igMeEd7rSuG7imTSsK5vFQUY-f8gcdb4qhAHw6PW_r47BzGKMBFODh/exec";
+const PIX = "11998385244";
+const TOTAL = 9;
 
 function enviar(e){
 e.preventDefault();
@@ -80,10 +206,26 @@ nick: document.getElementById("nick").value
 })
 });
 
-document.getElementById("msg").innerHTML =
-"Cadastro enviado! Faça o Pix de R$5 e envie comprovante.";
+document.getElementById("pixArea").innerHTML = `
+<div class="alert">
+✅ Cadastro enviado!<br><br>
+Faça o Pix de <b>R$5,00</b><br><br>
+
+<b id="pixKey">${PIX}</b>
+
+<button class="copy-btn" onclick="copiar()">📋 Copiar Pix</button>
+
+<br><br>
+Envie comprovante com nome + nick
+</div>
+`;
 
 carregar();
+}
+
+function copiar(){
+navigator.clipboard.writeText(PIX);
+alert("Pix copiado!");
 }
 
 function carregar(){
@@ -96,15 +238,23 @@ lista.innerHTML="";
 
 data.forEach(nick=>{
 let li=document.createElement("li");
-li.innerText=nick;
+li.innerHTML = `${nick} <span class="badge">OK</span>`;
 lista.appendChild(li);
 });
 
-let total=9;
-let ocupadas=data.length;
+let ocupadas = data.length;
 
 document.getElementById("ocupadas").innerText=ocupadas;
-document.getElementById("restantes").innerText=total-ocupadas;
+document.getElementById("restantes").innerText=TOTAL-ocupadas;
+document.getElementById("fill").style.width=(ocupadas/TOTAL*100)+"%";
+
+if(ocupadas >= TOTAL){
+document.getElementById("alerta").innerHTML="🔥 Sala lotada!";
+}else if(ocupadas >= TOTAL-2){
+document.getElementById("alerta").innerHTML="⚠️ Últimas vagas!";
+}else{
+document.getElementById("alerta").innerHTML="Vagas abertas";
+}
 
 });
 }
