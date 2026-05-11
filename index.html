@@ -37,6 +37,21 @@ body{
   text-align:center;
 }
 
+.progress{
+  width:100%;
+  height:10px;
+  background:#1f2937;
+  border-radius:999px;
+  margin-top:10px;
+  overflow:hidden;
+}
+
+.fill{
+  height:100%;
+  width:0%;
+  background:#22c55e;
+}
+
 input{
   width:100%;
   padding:12px;
@@ -57,7 +72,19 @@ button{
   font-weight:bold;
 }
 
-/* TELA PIX FULL */
+ul{
+  list-style:none;
+  margin-top:10px;
+}
+
+li{
+  background:#1f2937;
+  padding:8px;
+  border-radius:8px;
+  margin-bottom:6px;
+}
+
+/* TELA PIX */
 #telaPix{
   display:none;
   position:fixed;
@@ -72,7 +99,6 @@ button{
   flex-direction:column;
   text-align:center;
 }
-
 </style>
 </head>
 
@@ -94,6 +120,18 @@ button{
 </div>
 
 <div class="card">
+<h3>🚨 Vagas</h3>
+<p><span id="ocupadas">0</span>/9 preenchidas</p>
+<p>Restam <span id="restantes">9</span></p>
+
+<div class="progress">
+<div class="fill" id="fill"></div>
+</div>
+
+<p id="statusSala"></p>
+</div>
+
+<div class="card">
 <h3>📝 Entrar</h3>
 
 <form id="form">
@@ -106,6 +144,11 @@ button{
 <p id="msg"></p>
 </div>
 
+<div class="card">
+<h3>👥 Players</h3>
+<ul id="lista"></ul>
+</div>
+
 </div>
 </div>
 
@@ -113,7 +156,6 @@ button{
 <div id="telaPix">
 
 <h2>💸 Finalizar pagamento</h2>
-
 <p><b>Valor: R$5,00</b></p>
 
 <img id="qr" style="width:220px;margin:15px;border-radius:12px;">
@@ -135,39 +177,11 @@ button{
 const URL = "https://script.google.com/macros/s/AKfycbwsBIpdwuovHQakSSfsz5sOFvufFNK3-tHKeWYZ2c2_4bgGZPARAgkW-y3ElwrxzicU/exec";
 const PIX = "11998385244";
 const TEL = "5511998385244";
-
-const form = document.getElementById("form");
-
-form.addEventListener("submit", async function(e){
-  e.preventDefault();
-
-  const nome = document.getElementById("nome").value;
-  const tel = document.getElementById("tel").value;
-  const nick = document.getElementById("nick").value;
-
-  try{
-    const res = await fetch(URL,{
-      method:"POST",
-      body:JSON.stringify({nome,telefone:tel,nick})
-    });
-
-    const txt = await res.text();
-
-    if(txt==="LOTADO") return alert("Sala lotada");
-    if(txt==="JA_ENTROU") return alert("Nick já cadastrado");
-
-    abrirPix(nome,nick);
-
-  }catch{
-    alert("Erro ao cadastrar");
-  }
-});
+const TOTAL = 9;
 
 function abrirPix(nome,nick){
-
   document.getElementById("site").style.display="none";
-  const tela = document.getElementById("telaPix");
-  tela.style.display="flex";
+  document.getElementById("telaPix").style.display="flex";
 
   document.getElementById("qr").src =
   `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${PIX}`;
@@ -182,33 +196,64 @@ function abrirPix(nome,nick){
   localStorage.setItem("nick",nick);
 }
 
+document.getElementById("form").onsubmit = async (e)=>{
+  e.preventDefault();
+
+  const nome = nome.value;
+  const tel = tel.value;
+  const nick = nick.value;
+
+  const res = await fetch(URL,{
+    method:"POST",
+    body:JSON.stringify({nome,telefone:tel,nick})
+  });
+
+  const txt = await res.text();
+
+  if(txt==="LOTADO") return alert("Sala lotada");
+  if(txt==="JA_ENTROU") return alert("Nick já cadastrado");
+
+  abrirPix(nome,nick);
+  carregar();
+};
+
 function copiar(){
   navigator.clipboard.writeText(PIX);
   alert("Pix copiado!");
 }
 
-window.onload = function(){
+async function carregar(){
+  const res = await fetch(URL);
+  const data = await res.json();
+
+  lista.innerHTML="";
+
+  data.forEach(n=>{
+    const li=document.createElement("li");
+    li.textContent=n;
+    lista.appendChild(li);
+  });
+
+  ocupadas.textContent=data.length;
+  restantes.textContent=TOTAL-data.length;
+  fill.style.width=(data.length/TOTAL*100)+"%";
+
+  statusSala.textContent =
+  data.length>=TOTAL?"🔥 Sala lotada":
+  data.length>=7?"⚠️ Últimas vagas":
+  "✅ Vagas abertas";
+}
+
+window.onload = ()=>{
+  carregar();
 
   if(localStorage.getItem("pix")=="1"){
-
-    document.getElementById("site").style.display="none";
-
-    const tela = document.getElementById("telaPix");
-    tela.style.display="flex";
-
-    document.getElementById("qr").src =
-    `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${PIX}`;
-
-    const nome = localStorage.getItem("nome");
-    const nick = localStorage.getItem("nick");
-
-    const msg = `Olá, fiz o pagamento do Diário do DK.%0ANome: ${nome}%0ANick: ${nick}`;
-
-    document.getElementById("zap").href =
-    `https://wa.me/${TEL}?text=${msg}`;
+    abrirPix(
+      localStorage.getItem("nome"),
+      localStorage.getItem("nick")
+    );
   }
-
-}
+};
 </script>
 
 </body>
