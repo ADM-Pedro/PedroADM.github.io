@@ -171,6 +171,17 @@ li{
 </button>
 </a>
 
+<!-- 🔥 BOTÃO NOVA PARTIDA -->
+<button onclick="resetar()" style="
+margin-top:10px;
+background:#ef4444;
+color:#fff;
+width:90%;
+max-width:300px;
+">
+🔄 Nova partida
+</button>
+
 </div>
 
 <script>
@@ -199,9 +210,9 @@ function abrirPix(nome,nick){
 document.getElementById("form").onsubmit = async (e)=>{
   e.preventDefault();
 
-  const nome = nome.value;
-  const tel = tel.value;
-  const nick = nick.value;
+  const nome = document.getElementById("nome").value;
+  const tel = document.getElementById("tel").value;
+  const nick = document.getElementById("nick").value;
 
   const res = await fetch(URL,{
     method:"POST",
@@ -220,6 +231,12 @@ document.getElementById("form").onsubmit = async (e)=>{
 function copiar(){
   navigator.clipboard.writeText(PIX);
   alert("Pix copiado!");
+}
+
+// 🔥 RESETAR PARTIDA
+function resetar(){
+  localStorage.clear();
+  location.reload();
 }
 
 async function carregar(){
