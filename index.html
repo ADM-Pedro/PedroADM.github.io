@@ -1,244 +1,235 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diário do DK</title>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{
-      font-family:Arial,sans-serif;
-      background:#0b1f38;
-      color:#fff;
-      padding:20px;
-    }
-    .container{
-      max-width:500px;
-      margin:0 auto;
-    }
-    .card{
-      background:#111827;
-      border-radius:14px;
-      padding:16px;
-      margin-bottom:14px;
-    }
-    h1{
-      text-align:center;
-      margin-bottom:8px;
-    }
-    .sub{
-      text-align:center;
-      opacity:.9;
-      margin-bottom:16px;
-    }
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:8px;
-      margin-top:12px;
-    }
-    .stat{
-      background:#1f2937;
-      border-radius:10px;
-      padding:10px;
-      text-align:center;
-      font-size:14px;
-    }
-    .progress{
-      width:100%;
-      height:10px;
-      background:#1f2937;
-      border-radius:999px;
-      overflow:hidden;
-      margin-top:10px;
-    }
-    .fill{
-      height:100%;
-      width:0%;
-      background:#22c55e;
-      transition:.3s;
-    }
-    input{
-      width:100%;
-      padding:12px;
-      margin-top:10px;
-      border:none;
-      border-radius:10px;
-      background:#0f172a;
-      color:#fff;
-    }
-    button{
-      width:100%;
-      padding:13px;
-      margin-top:10px;
-      border:none;
-      border-radius:10px;
-      background:#22c55e;
-      color:#000;
-      font-weight:bold;
-      cursor:pointer;
-    }
-    .copy-btn{
-      background:#2563eb;
-      color:#fff;
-    }
-    ul{
-      list-style:none;
-      padding-left:0;
-      margin-top:10px;
-    }
-    li{
-      background:#1f2937;
-      border-radius:8px;
-      padding:10px;
-      margin-bottom:8px;
-    }
-    #msg{
-      margin-top:12px;
-      line-height:1.5;
-    }
-    .small{
-      opacity:.85;
-      font-size:14px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diário do DK</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:Arial;
+  background:#0b1f38;
+  color:#fff;
+  padding:20px;
+}
+.container{max-width:500px;margin:0 auto}
+.card{
+  background:#111827;
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:14px;
+}
+h1{text-align:center;margin-bottom:8px}
+.sub{text-align:center;opacity:.9;margin-bottom:16px}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:12px;
+}
+.stat{
+  background:#1f2937;
+  border-radius:10px;
+  padding:10px;
+  text-align:center;
+}
+
+.progress{
+  width:100%;
+  height:10px;
+  background:#1f2937;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:10px;
+}
+.fill{
+  height:100%;
+  width:0%;
+  background:#22c55e;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border:none;
+  border-radius:10px;
+  background:#0f172a;
+  color:#fff;
+}
+button{
+  width:100%;
+  padding:13px;
+  margin-top:10px;
+  border:none;
+  border-radius:10px;
+  background:#22c55e;
+  color:#000;
+  font-weight:bold;
+}
+
+.copy-btn{
+  background:#2563eb;
+  color:#fff;
+}
+
+.pix-screen{
+  text-align:center;
+}
+
+.whats-btn{
+  background:#25D366;
+  color:#fff;
+}
+</style>
 </head>
+
 <body>
-  <div class="container">
 
-    <div class="card">
-      <h1>💰 Diário do DK</h1>
-      <div class="sub">Partidas de Brawl Stars valendo dinheiro</div>
+<div class="container">
 
-      <div class="stats">
-        <div class="stat">💵 R$5<br>Entrada</div>
-        <div class="stat">⚔️ +R$3<br>Kill</div>
-        <div class="stat">🏆 +R$10<br>Vitória</div>
-      </div>
-    </div>
+<div class="card">
+  <h1>💰 Diário do DK</h1>
+  <div class="sub">Partidas de Brawl Stars valendo dinheiro</div>
 
-    <div class="card">
-      <h3>🚨 Vagas</h3>
-      <p><span id="ocupadas">0</span>/9 preenchidas</p>
-      <p>Restam <span id="restantes">9</span> vagas</p>
-      <div class="progress">
-        <div class="fill" id="fill"></div>
-      </div>
-      <p class="small" id="statusSala" style="margin-top:10px;">Carregando...</p>
-    </div>
-
-    <div class="card">
-      <h3>📝 Entrar</h3>
-
-      <form id="cadastroForm">
-        <input id="nome" type="text" placeholder="Seu nome" required>
-        <input id="tel" type="tel" placeholder="Telefone" required>
-        <input id="nick" type="text" placeholder="Nick do Brawl Stars" required>
-        <button type="submit">Garantir vaga</button>
-      </form>
-
-      <div id="msg"></div>
-    </div>
-
-    <div class="card">
-      <h3>👥 Players cadastrados</h3>
-      <ul id="lista"></ul>
-    </div>
-
+  <div class="stats">
+    <div class="stat">💵 R$5<br>Entrada</div>
+    <div class="stat">⚔️ +R$3<br>Kill</div>
+    <div class="stat">🏆 +R$10<br>Vitória</div>
   </div>
+</div>
 
-  <script>
-    const URL = "https://script.google.com/macros/s/AKfycbwsBIpdwuovHQakSSfsz5sOFvufFNK3-tHKeWYZ2c2_4bgGZPARAgkW-y3ElwrxzicU/exec";
-    const PIX = "11998385244";
-    const TOTAL = 9;
+<div class="card">
+  <h3>🚨 Vagas</h3>
+  <p><span id="ocupadas">0</span>/9</p>
+  <div class="progress">
+    <div class="fill" id="fill"></div>
+  </div>
+  <p id="statusSala">Carregando...</p>
+</div>
 
-    const form = document.getElementById("cadastroForm");
-    const msg = document.getElementById("msg");
-    const lista = document.getElementById("lista");
-    const ocupadasEl = document.getElementById("ocupadas");
-    const restantesEl = document.getElementById("restantes");
-    const fillEl = document.getElementById("fill");
-    const statusSala = document.getElementById("statusSala");
+<div class="card" id="formCard">
+  <h3>📝 Entrar</h3>
 
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault();
+  <form id="form">
+    <input id="nome" placeholder="Seu nome" required>
+    <input id="tel" placeholder="Telefone" required>
+    <input id="nick" placeholder="Nick" required>
+    <button>Garantir vaga</button>
+  </form>
+</div>
 
-      const nome = document.getElementById("nome").value.trim();
-      const telefone = document.getElementById("tel").value.trim();
-      const nick = document.getElementById("nick").value.trim();
+<div class="card pix-screen" id="pixScreen" style="display:none;">
+  <h3>💸 Finalizar pagamento</h3>
+  <p><b>Valor: R$5,00</b></p>
 
-      try {
-        const res = await fetch(URL, {
-          method: "POST",
-          body: JSON.stringify({ nome, telefone, nick })
-        });
+  <img id="qr" style="width:200px;margin:15px 0;border-radius:10px;">
 
-        const texto = await res.text();
+  <p id="pix">11998385244</p>
 
-        if (texto === "LOTADO") {
-          msg.innerHTML = "❌ A sala já está lotada.";
-          return;
-        }
+  <button class="copy-btn" onclick="copiar()">📋 Copiar Pix</button>
 
-        if (texto === "JA_ENTROU") {
-          msg.innerHTML = "⚠️ Esse nick já foi cadastrado.";
-          return;
-        }
+  <a id="zap" target="_blank">
+    <button class="whats-btn">💬 Enviar comprovante</button>
+  </a>
+</div>
 
-        msg.innerHTML = `
-          ✅ Cadastro enviado!<br><br>
-          Faça o Pix de <b>R$5,00</b><br><br>
-          <b id="pixKey">${PIX}</b><br>
-          <button class="copy-btn" type="button" onclick="copiarPix()">📋 Copiar Pix</button>
-          <br><br>
-          Envie o comprovante com nome + nick
-        `;
+<div class="card">
+  <h3>👥 Players</h3>
+  <ul id="lista"></ul>
+</div>
 
-        form.reset();
-        carregar();
-      } catch (err) {
-        msg.innerHTML = "❌ Erro ao enviar cadastro.";
-      }
-    });
+</div>
 
-    function copiarPix() {
-      navigator.clipboard.writeText(PIX);
-      alert("Pix copiado!");
-    }
+<script>
+const URL = "https://script.google.com/macros/s/AKfycbwsBIpdwuovHQakSSfsz5sOFvufFNK3-tHKeWYZ2c2_4bgGZPARAgkW-y3ElwrxzicU/exec";
+const PIX = "11998385244";
+const TEL = "5511998385244";
 
-    async function carregar() {
-      try {
-        const res = await fetch(URL);
-        const data = await res.json();
+const form = document.getElementById("form");
+const pixScreen = document.getElementById("pixScreen");
+const formCard = document.getElementById("formCard");
 
-        lista.innerHTML = "";
+function gerarQR(){
+  document.getElementById("qr").src =
+  `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${PIX}`;
+}
 
-        data.forEach(function(nick) {
-          const li = document.createElement("li");
-          li.textContent = nick;
-          lista.appendChild(li);
-        });
+function salvar(nome,nick){
+  localStorage.setItem("pix","1");
+  localStorage.setItem("nome",nome);
+  localStorage.setItem("nick",nick);
+}
 
-        const ocupadas = data.length;
-        const restantes = TOTAL - ocupadas;
+function carregarPix(){
+  if(localStorage.getItem("pix")=="1"){
+    abrirPix(
+      localStorage.getItem("nome"),
+      localStorage.getItem("nick")
+    );
+  }
+}
 
-        ocupadasEl.textContent = ocupadas;
-        restantesEl.textContent = restantes;
-        fillEl.style.width = (ocupadas / TOTAL * 100) + "%";
+function abrirPix(nome,nick){
+  formCard.style.display="none";
+  pixScreen.style.display="block";
 
-        if (ocupadas >= TOTAL) {
-          statusSala.textContent = "🔥 Sala lotada";
-        } else if (restantes <= 2) {
-          statusSala.textContent = "⚠️ Últimas vagas";
-        } else {
-          statusSala.textContent = "✅ Vagas abertas";
-        }
-      } catch (err) {
-        statusSala.textContent = "❌ Erro ao carregar jogadores";
-      }
-    }
+  gerarQR();
 
-    carregar();
-  </script>
+  const msg = `Olá, fiz o pagamento do Diário do DK.%0ANome: ${nome}%0ANick: ${nick}`;
+  document.getElementById("zap").href =
+  `https://wa.me/${TEL}?text=${msg}`;
+}
+
+form.onsubmit = async (e)=>{
+  e.preventDefault();
+
+  const nome = nomeInput.value;
+  const tel = telInput.value;
+  const nick = nickInput.value;
+
+  const res = await fetch(URL,{
+    method:"POST",
+    body:JSON.stringify({nome,telefone:tel,nick})
+  });
+
+  const txt = await res.text();
+
+  if(txt=="LOTADO") return alert("Sala lotada");
+  if(txt=="JA_ENTROU") return alert("Nick já cadastrado");
+
+  salvar(nome,nick);
+  abrirPix(nome,nick);
+};
+
+function copiar(){
+  navigator.clipboard.writeText(PIX);
+  alert("Copiado!");
+}
+
+async function load(){
+  const r = await fetch(URL);
+  const d = await r.json();
+
+  lista.innerHTML="";
+  d.forEach(n=>{
+    const li=document.createElement("li");
+    li.textContent=n;
+    lista.appendChild(li);
+  });
+
+  fill.style.width=(d.length/9*100)+"%";
+
+  statusSala.textContent =
+  d.length>=9?"LOTADO":
+  d.length>=7?"Últimas vagas":"Aberto";
+}
+
+carregarPix();
+load();
+</script>
+
 </body>
 </html>
